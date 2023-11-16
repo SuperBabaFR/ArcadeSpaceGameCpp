@@ -48,12 +48,12 @@ void Gameplay::Update()
 {
 	Controls();
 
-	_cam.SetTarget(player.GetPosition());
-
 	for (auto sprite : _listSprite)
 	{
 		sprite->Update();
 	}
+
+	_cam.SetTarget(player.GetPosition());
 
 	Collision();
 

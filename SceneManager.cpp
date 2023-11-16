@@ -81,7 +81,6 @@ void SceneManager::Draw()
 {
 	ClearBackground(BLACK);
 	SceneID currentSceneName = _currentScene->GetSceneName();
-	
 	if (currentSceneName == Jeu)
 	{
 		raywrp::BeginDraw2D(_jeu.GetCamera());
