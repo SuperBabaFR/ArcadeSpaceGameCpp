@@ -13,5 +13,140 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\Scènes">
+      <UniqueIdentifier>{7f34ae39-8abf-456d-a628-790a5e3a26f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Objets">
+      <UniqueIdentifier>{168796d3-163e-4825-9425-f9afadf801e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Scènes">
+      <UniqueIdentifier>{d337432a-b0b3-42c3-9a44-258ef19b6cb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Objets">
+      <UniqueIdentifier>{bc18b235-1173-41ab-b75a-4eefc8854109}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\RaylibWrap">
+      <UniqueIdentifier>{45f27d4f-31f8-4257-9944-b57b444bb204}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Effets">
+      <UniqueIdentifier>{2cb7fb10-bcd8-4996-a86a-e9e9b537986a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Effets">
+      <UniqueIdentifier>{1ff7e6b2-901b-4e02-a768-0a40867d58a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\RaylibWrap">
+      <UniqueIdentifier>{2039cb62-e3d1-4b7c-af7f-dbf91f3e8a51}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Gameover.cpp">
+      <Filter>Fichiers sources\Scènes</Filter>
+    </ClCompile>
+    <ClCompile Include="Gameplay.cpp">
+      <Filter>Fichiers sources\Scènes</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuPrincipal.cpp">
+      <Filter>Fichiers sources\Scènes</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Fichiers sources\Scènes</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Fichiers sources\Scènes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Fichiers sources\Scènes</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Fichiers sources\Objets</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Fichiers sources\Objets</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Fichiers sources\Objets</Filter>
+    </ClCompile>
+    <ClCompile Include="Star.cpp">
+      <Filter>Fichiers sources\Effets</Filter>
+    </ClCompile>
+    <ClCompile Include="StarryBackground.cpp">
+      <Filter>Fichiers sources\Effets</Filter>
+    </ClCompile>
+    <ClCompile Include="Cam2D.cpp">
+      <Filter>Fichiers sources\RaylibWrap</Filter>
+    </ClCompile>
+    <ClCompile Include="RaylibWrapper.cpp">
+      <Filter>Fichiers sources\RaylibWrap</Filter>
+    </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>Fichiers sources\RaylibWrap</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Gameover.h">
+      <Filter>Fichiers d%27en-tête\Scènes</Filter>
+    </ClInclude>
+    <ClInclude Include="Gameplay.h">
+      <Filter>Fichiers d%27en-tête\Scènes</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuPrincipal.h">
+      <Filter>Fichiers d%27en-tête\Scènes</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Fichiers d%27en-tête\Scènes</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Fichiers d%27en-tête\Scènes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Fichiers d%27en-tête\Scènes</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Fichiers d%27en-tête\Objets</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Fichiers d%27en-tête\Objets</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Fichiers d%27en-tête\Objets</Filter>
+    </ClInclude>
+    <ClInclude Include="Star.h">
+      <Filter>Fichiers d%27en-tête\Effets</Filter>
+    </ClInclude>
+    <ClInclude Include="StarryBackground.h">
+      <Filter>Fichiers d%27en-tête\Effets</Filter>
+    </ClInclude>
+    <ClInclude Include="Cam2D.h">
+      <Filter>Fichiers d%27en-tête\RaylibWrap</Filter>
+    </ClInclude>
+    <ClInclude Include="Couleur.h">
+      <Filter>Fichiers d%27en-tête\RaylibWrap</Filter>
+    </ClInclude>
+    <ClInclude Include="RaylibWrapper.h">
+      <Filter>Fichiers d%27en-tête\RaylibWrap</Filter>
+    </ClInclude>
+    <ClInclude Include="Rect.h">
+      <Filter>Fichiers d%27en-tête\RaylibWrap</Filter>
+    </ClInclude>
+    <ClInclude Include="Vec2.h">
+      <Filter>Fichiers d%27en-tête\RaylibWrap</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="settings.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ressources\select.ogg">
+      <Filter>Fichiers de ressources</Filter>
+    </None>
   </ItemGroup>
 </Project>
