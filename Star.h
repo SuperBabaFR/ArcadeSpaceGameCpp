@@ -10,7 +10,7 @@ class Star
 		float _rayon;
 	public :
 		Star(Vec2<float> position, float speed, float rayon);
-		void Update(); //Vec2<float> center);
+		void Update(Vec2<float> center);
 		void Draw() const;
 };
 

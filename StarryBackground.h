@@ -11,7 +11,7 @@ class StarryBackground
 	public : 
 		StarryBackground(int amount, float size, float maxSpeed);
 		void Init();
-		void Update();
+		void Update(Vec2<float> center);
 		void Draw();
 };
 

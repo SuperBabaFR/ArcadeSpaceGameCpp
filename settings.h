@@ -5,5 +5,5 @@ namespace stg {
 	constexpr int screenWidth = 1280;
 	constexpr int screenHeight = 720;
 	// Titre fenêtre
-	constexpr auto screenTitle = "Pong 2024";
+	constexpr auto screenTitle = "Arcade Game";
 }

@@ -1,10 +1,7 @@
 #include <iostream>
 #include "Gameplay.h"
-#include "settings.h"
-#include "raylib.h"
-#include "RaylibWrapper.h"
 
-Gameplay::Gameplay() : Scene(Jeu), player(), _cam()
+Gameplay::Gameplay() : Scene(Jeu), player(), _cam(), _background(stg::screenWidth, 20, 100)
 {
 	_delay = 3.0f;
 	_gamePaused = false;
@@ -16,7 +13,7 @@ Gameplay::Gameplay() : Scene(Jeu), player(), _cam()
 void Gameplay::InitObjects()
 {
 	_listSprite.clear();
-	// Positionnement des joueurs
+	// Positionnement du joueur
 	player.Init(stg::screenWidth / 2.0f, stg::screenHeight / 2.0f);
 	// Ajout des sprites
 	_listSprite.push_back(&player);
@@ -24,7 +21,8 @@ void Gameplay::InitObjects()
 
 void Gameplay::Init()
 {
-	// Sounds effects 
+	// Background
+	_background.Init();
 	InitObjects();
 }
 
@@ -47,6 +45,8 @@ void Gameplay::ScoringSystem()
 void Gameplay::Update()
 {
 	Controls();
+
+	_background.Update(player.GetPosition());
 
 	for (auto sprite : _listSprite)
 	{
@@ -74,12 +74,19 @@ Cam2D Gameplay::GetCamera()
 
 void Gameplay::Draw()
 {
-	for (auto sprite : _listSprite)
-	{
-		if (sprite->isEnabled())
+	raywrp::BeginDraw2D(_cam);
+		
+		_background.Draw();
+		
+		for (auto sprite : _listSprite)
 		{
-			sprite->Draw();
+			if (sprite->isEnabled())
+			{
+				sprite->Draw();
+			}
 		}
-	}
+
+		raywrp::DrawCircleV({0,0}, 20, BLANC);
+
 	raywrp::EndDraw2D();
 }

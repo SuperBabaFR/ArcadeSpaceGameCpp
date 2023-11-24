@@ -22,12 +22,14 @@ void SceneManager::SwitchScene(Scene& scene)
 void SceneManager::Update()
 {
 	int scoreDiff{ 0 };
-
-	_background.Update();
-	_currentScene->Update();
+	
 	
 	SceneID currentSceneName = _currentScene->GetSceneName();
 
+	if (currentSceneName != Jeu)
+		_background.Update({ stg::screenWidth / 2.0f , stg::screenHeight / 2.0f });
+
+	_currentScene->Update();
 
 	switch (currentSceneName)
 	{
@@ -81,18 +83,11 @@ void SceneManager::Draw()
 {
 	ClearBackground(BLACK);
 	SceneID currentSceneName = _currentScene->GetSceneName();
-	if (currentSceneName == Jeu)
-	{
-		raywrp::BeginDraw2D(_jeu.GetCamera());
-			_background.Draw();
-			_jeu.Draw();
-		raywrp::EndDraw2D();
-	}
-	else {
-		_background.Draw();
-		_currentScene->Draw();
-	}
 	
+	if (currentSceneName != Jeu)
+		_background.Draw();
+
+	_currentScene->Draw();
 }
 
 //if (_jeu.playerDeath() > 0) // Joueur 1 gagne

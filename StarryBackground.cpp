@@ -32,11 +32,11 @@ void StarryBackground::Init()
 	}
 }
 
-void StarryBackground::Update()
+void StarryBackground::Update(Vec2<float> center)
 {
 	for (Star &star : _stars)
 	{
-		star.Update();
+		star.Update(center);
 	}
 }
 
