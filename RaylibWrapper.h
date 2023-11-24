@@ -22,7 +22,11 @@ namespace raywrp {
 
 	//bool IsSongPlaying(Sound song);
 	//void PlaySong(Sound song);
+
 	Vec2<float> GetMousePositionV();
 	float GetDeltaTime();
+
+	// Math
+	float Vec2AngleDeg(Vec2<float> v1, Vec2<float> v2);
 }
 

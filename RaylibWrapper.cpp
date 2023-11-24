@@ -89,3 +89,10 @@ float raywrp::GetDeltaTime()
 {	
 	return GetFrameTime();
 }
+
+float raywrp::Vec2AngleDeg(Vec2<float> v1, Vec2<float> v2)
+{
+	float result = atan2f(v2.GetY() - v1.GetY(), v2.GetX() - v1.GetX()) / PI * 180;
+
+	return (result > 0)? result : 180 + abs(result);
+}
