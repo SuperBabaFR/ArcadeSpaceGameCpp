@@ -6,7 +6,9 @@
 Player::Player()
 {	
 	_speed = 500;
-	_rotation = 0;
+	_rotation = 60;
+	_size = 25;
+	_canonSize = { _size * 2.5f, _size };
 }
 
 void Player::Init(float x, float y)
@@ -27,16 +29,24 @@ void Player::Update()
 	else if (IsKeyDown(KEY_D))
 		_velocity.SetX(_velocity.GetX() + _speed * raywrp::GetDeltaTime());
 
-	_rotation = raywrp::Vec2AngleDeg(raywrp::GetMousePositionV(), _position);
+	// _rotation = ;
+	
 	
 
+	if (IsKeyDown(KEY_E))
+		_rotation -= 1;
+	else if (IsKeyDown(KEY_Q))
+		_rotation += 1;
 
-	//if (IsKeyReleased(KEY_E))
-	//	_rotation += 10;
 
 	Sprite::Update();
 
 	_velocity = { 0,0 };
+}
+
+void Player::SetRotation(float rotation)
+{
+	_rotation = rotation;
 }
 
 void Player::Reactor()
@@ -51,9 +61,10 @@ Vec2<float> Player::GetPosition()
 
 void Player::Draw()
 {
-	std::string text{ "Rotation : " };
-	text += std::to_string(_rotation);
-	raywrp::DrawTextV(text, { 10,0 }, 20, ROUGE);
-	//raywrp::DrawRectangleV(_position, {50,50}, BLEU);
-	DrawPoly({ _position.GetX(), _position.GetY() }, 3, 30, _rotation, BLUE);
+	Rect forme { _position.GetX(), _position.GetY(), _canonSize.GetX(), _canonSize.GetY() };
+	Vec2<float> origin{ _size / 2, _size / 2 };
+
+	raywrp::DrawRectangle(forme, origin, _rotation, GRIS);
+
+	raywrp::DrawCircleV(_position, _size, BLEU);
 }

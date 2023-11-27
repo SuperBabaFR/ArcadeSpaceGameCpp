@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Gameplay.h"
 
-Gameplay::Gameplay() : Scene(Jeu), player(), _cam(), _background(stg::screenWidth, 20, 100)
+Gameplay::Gameplay() : Scene(Jeu), player(), _cam(), _background(stg::StarAmount, 20, 100)
 {
 	_delay = 3.0f;
 	_gamePaused = false;
@@ -28,7 +28,12 @@ void Gameplay::Init()
 
 void Gameplay::Controls()
 {
+	Vec2<float> mousePos;
+	mousePos = raywrp::GetScreenToWorld2DPoint(raywrp::GetMousePositionV(), _cam);
 
+	float rotation = raywrp::Vec2AngleDeg(player.GetPosition(), mousePos);
+	
+	player.SetRotation(rotation);
 }
 
 void Gameplay::Collision()
@@ -73,7 +78,9 @@ Cam2D Gameplay::GetCamera()
 }
 
 void Gameplay::Draw()
-{
+{	
+	DrawFPS(0, 0);
+	
 	raywrp::BeginDraw2D(_cam);
 		
 		_background.Draw();
@@ -85,6 +92,10 @@ void Gameplay::Draw()
 				sprite->Draw();
 			}
 		}
+
+		std::string text{ "Nombre d'etoiles : " };
+		text += std::to_string(_background.GetStarAmount());
+		raywrp::DrawTextV(text, { 100,500 }, 20, VIOLETFONCE);
 
 		raywrp::DrawCircleV({0,0}, 20, BLANC);
 

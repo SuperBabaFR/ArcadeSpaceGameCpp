@@ -1,7 +1,7 @@
 #include "SceneManager.h"
 #include "settings.h"
 
-SceneManager::SceneManager() : _background(stg::screenWidth, 20, 100)
+SceneManager::SceneManager() : _background(stg::StarAmount, 20, 100)
 {
 	_currentScene = &_menu;
 	Init();

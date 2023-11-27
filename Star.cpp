@@ -9,25 +9,25 @@ Star::Star(Vec2<float> position, float speed, float rayon) : _position(position)
 void Star::Update(Vec2<float> center)
 {
 	
-	_position.SetY(_position.GetY() + _speed * raywrp::GetDeltaTime());
-	_position.SetX(_position.GetX() + _speed * raywrp::GetDeltaTime());
+	// _position.SetY(_position.GetY() + _speed * raywrp::GetDeltaTime());
+	// _position.SetX(_position.GetX() + _speed * raywrp::GetDeltaTime());
 
 	if (_position.GetY() + _rayon >= center.GetY() + stg::screenHeight / 2.0f)
 	{
-		_position.SetY(center.GetY() - stg::screenHeight / 2.0f - _rayon);
+		_position.SetY(center.GetY() - stg::screenHeight / 2.0f + _rayon);
 	}
 	else if (_position.GetY() - _rayon <= center.GetY() - stg::screenHeight / 2.0f)
 	{
-		_position.SetY(center.GetY() + stg::screenHeight / 2.0f + _rayon);
+		_position.SetY(center.GetY() + stg::screenHeight / 2.0f - _rayon);
 	}
 
 	if (_position.GetX() + _rayon >= center.GetX() + stg::screenWidth / 2.0f)
 	{
-		_position.SetX(center.GetX() - stg::screenWidth / 2.0f - _rayon);
+		_position.SetX(center.GetX() - stg::screenWidth / 2.0f + _rayon);
 	}
 	else if (_position.GetX() - _rayon <= center.GetX() - stg::screenWidth / 2.0f)
 	{
-		_position.SetX(center.GetX() + stg::screenWidth / 2.0f + _rayon);
+		_position.SetX(center.GetX() + stg::screenWidth / 2.0f - _rayon);
 	}
 
 }

@@ -13,5 +13,6 @@ class StarryBackground
 		void Init();
 		void Update(Vec2<float> center);
 		void Draw();
+		int GetStarAmount();
 };
 

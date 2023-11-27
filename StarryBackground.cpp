@@ -17,6 +17,11 @@ int randomNumber2(int minimum, int maximum)
 	return valeur;
 }
 
+int StarryBackground::GetStarAmount()
+{
+	return _stars.size();
+}
+
 void StarryBackground::Init()
 {
 	_stars.clear();
@@ -25,7 +30,7 @@ void StarryBackground::Init()
 	{
 		Vec2<float> pos{ float(randomNumber2(0, stg::screenWidth)), float(randomNumber2(0, stg::screenHeight)) };
 		float speed = randomNumber2(10, int(_maxSpeed)) / 10.0f;
-		float rayon = randomNumber2(7, int(_maxSize)) / 10.0f;
+		float rayon = randomNumber2(8, int(_maxSize)) / 10.0f;
 		
 		Star newStar{ pos, speed, rayon };
 		_stars.push_back(newStar);
