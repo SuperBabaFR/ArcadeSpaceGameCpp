@@ -2,15 +2,15 @@
 #include "Vec2.h"
 #include "Couleur.h"
 #include "Rect.h"
+#include "Bullet.h"
 #include "Sprite.h"
-#include "raylib.h"
 
 class Player : public Sprite
 {
 private:
 	float _rotation;
-	float _speed;
-	float const MAXSPEED = 500.0;
+	float _power;
+	float const MAXSPEED = 5.0f;
 	float _size;
 	Couleur _color;
 	Vec2<float> _canonSize;
@@ -23,5 +23,6 @@ public:
 	void Draw() override;
 	// Methods
 	void Reactor();
+	Bullet Shoot(int type);
 	Vec2<float> GetPosition();
 };

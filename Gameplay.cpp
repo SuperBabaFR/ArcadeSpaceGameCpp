@@ -13,6 +13,7 @@ Gameplay::Gameplay() : Scene(Jeu), player(), _cam(), _background(stg::StarAmount
 void Gameplay::InitObjects()
 {
 	_listSprite.clear();
+	_listBullets.clear();
 	// Positionnement du joueur
 	player.Init(stg::screenWidth / 2.0f, stg::screenHeight / 2.0f);
 	// Ajout des sprites
@@ -34,6 +35,24 @@ void Gameplay::Controls()
 	float rotation = raywrp::Vec2AngleDeg(player.GetPosition(), mousePos);
 	
 	player.SetRotation(rotation);
+
+	if (IsKeyDown(KEY_SPACE))
+	{
+		player.Reactor();
+	}
+
+	if (IsMouseButtonDown(0))
+	{
+		Bullet tir = player.Shoot(1);
+		_listBullets.push_back(tir);
+		// _listSprite.push_back(&_listBullets.back());
+	}
+	else if (IsMouseButtonDown(1))
+	{
+		Bullet tir = player.Shoot(2);
+		_listBullets.push_back(tir);
+		// _listSprite.push_back(&_listBullets.back());
+	}
 }
 
 void Gameplay::Collision()
@@ -47,13 +66,32 @@ void Gameplay::ScoringSystem()
 
 }
 
+void Gameplay::BulletUpdate()
+{
+	// Bullet update
+	for (auto ItBullet = _listBullets.begin(); ItBullet != _listBullets.end(); )
+	{
+		if (ItBullet->isEnabled())
+		{
+			ItBullet->Update();
+			++ItBullet;
+		}
+		else
+		{
+			ItBullet = _listBullets.erase(ItBullet);
+		}
+	}
+}
+
 void Gameplay::Update()
 {
 	Controls();
 
 	_background.Update(player.GetPosition());
 
-	for (auto sprite : _listSprite)
+	BulletUpdate();
+
+	for (auto& sprite : _listSprite)
 	{
 		sprite->Update();
 	}
@@ -84,8 +122,16 @@ void Gameplay::Draw()
 	raywrp::BeginDraw2D(_cam);
 		
 		_background.Draw();
+
+		for (auto& bullet : _listBullets)
+		{
+			if (bullet.isEnabled())
+			{
+				bullet.Draw();
+			}
+		}
 		
-		for (auto sprite : _listSprite)
+		for (auto& sprite : _listSprite)
 		{
 			if (sprite->isEnabled())
 			{
@@ -97,7 +143,9 @@ void Gameplay::Draw()
 		text += std::to_string(_background.GetStarAmount());
 		raywrp::DrawTextV(text, { 100,500 }, 20, VIOLETFONCE);
 
-		raywrp::DrawCircleV({0,0}, 20, BLANC);
+		text = "Nombre de tirs : ";
+		text += std::to_string(_listBullets.size());
+		raywrp::DrawTextV(text, { 500,500 }, 20, VIOLETFONCE);
 
 	raywrp::EndDraw2D();
 }

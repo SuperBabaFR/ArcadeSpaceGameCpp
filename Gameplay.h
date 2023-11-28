@@ -3,6 +3,7 @@
 #include "Sprite.h"
 #include "Scene.h"
 #include "Player.h"
+#include "Bullet.h"
 #include "settings.h"
 #include "RaylibWrapper.h"
 #include "Cam2D.h"
@@ -12,6 +13,7 @@ class Gameplay : public Scene
 {
 private:
 	Player player;
+	std::list<Bullet> _listBullets;
 	float _delay;
 	bool _gamePaused;
 	Cam2D _cam;
@@ -31,6 +33,7 @@ public:
 	
 	// Méthodes
 	void ScoringSystem();
+	void BulletUpdate();
 	int playerDeath();
 	Cam2D GetCamera();
 };

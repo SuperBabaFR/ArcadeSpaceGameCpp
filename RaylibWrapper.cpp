@@ -129,7 +129,5 @@ float raywrp::Vec2AngleDeg(Vec2<float> v1, Vec2<float> v2)
 	if (angleDegrees < 0)
 		angleDegrees += 360;
 
-
-
 	return angleDegrees;
 }
