@@ -41,18 +41,18 @@ void Player::Reactor()
 		_velocity.SetY((_velocity.GetY() > 0) ? MAXSPEED : -MAXSPEED);
 }
 
-Bullet Player::Shoot(int type)
+std::shared_ptr<Bullet> Player::Shoot(int type)
 {
-	Bullet bullet{};
+	auto bullet = std::make_shared<Bullet>();
 	if (type == 1)
 	{
-		bullet = Bullet{ _position, {20,10}, 5, BLEU };
-		bullet.Init(_velocity, 500, _rotation);
+		bullet->Create( _position, {20,10}, 5, BLEU );
+		bullet->Init(_velocity, 500, _rotation);
 	}
 	else if (type == 2)
 	{
-		bullet = Bullet{ _position, {30,15}, 10, ROUGE };
-		bullet.Init(_velocity, 300, _rotation);
+		bullet->Create( _position, {30,15}, 10, ROUGE );
+		bullet->Init(_velocity, 300, _rotation);
 	}
 
 	return bullet;

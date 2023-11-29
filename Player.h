@@ -4,6 +4,7 @@
 #include "Rect.h"
 #include "Bullet.h"
 #include "Sprite.h"
+#include <iostream>
 
 class Player : public Sprite
 {
@@ -23,6 +24,6 @@ public:
 	void Draw() override;
 	// Methods
 	void Reactor();
-	Bullet Shoot(int type);
+	std::shared_ptr<Bullet> Shoot(int type);
 	Vec2<float> GetPosition();
 };

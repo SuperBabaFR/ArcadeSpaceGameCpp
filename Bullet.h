@@ -15,8 +15,8 @@ class Bullet : public Sprite
 		float _lifeTime;
 
 	public :
-		Bullet(Vec2<float> position, Vec2<float> size, int damage, Couleur color);
 		Bullet();
+		void Create(Vec2<float> position, Vec2<float> size, int damage, Couleur color);
 		void Init(Vec2<float> baseVelocity, float speed, float rotation);
 		void Update() override;
 		void Draw() override;

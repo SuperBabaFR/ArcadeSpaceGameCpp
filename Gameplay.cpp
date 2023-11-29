@@ -1,7 +1,7 @@
 #include <iostream>
 #include "Gameplay.h"
 
-Gameplay::Gameplay() : Scene(Jeu), player(), _cam(), _background(stg::StarAmount, 20, 100)
+Gameplay::Gameplay() : Scene(Jeu), player(std::make_shared<Player>()), _cam(), _background(stg::StarAmount, 20, 100)
 {
 	_delay = 3.0f;
 	_gamePaused = false;
@@ -13,11 +13,10 @@ Gameplay::Gameplay() : Scene(Jeu), player(), _cam(), _background(stg::StarAmount
 void Gameplay::InitObjects()
 {
 	_listSprite.clear();
-	_listBullets.clear();
 	// Positionnement du joueur
-	player.Init(stg::screenWidth / 2.0f, stg::screenHeight / 2.0f);
+	player->Init(stg::screenWidth / 2.0f, stg::screenHeight / 2.0f);
 	// Ajout des sprites
-	_listSprite.push_back(&player);
+	_listSprite.push_back(player);
 }
 
 void Gameplay::Init()
@@ -32,26 +31,28 @@ void Gameplay::Controls()
 	Vec2<float> mousePos;
 	mousePos = raywrp::GetScreenToWorld2DPoint(raywrp::GetMousePositionV(), _cam);
 
-	float rotation = raywrp::Vec2AngleDeg(player.GetPosition(), mousePos);
+	float rotation = raywrp::Vec2AngleDeg(player->GetPosition(), mousePos);
 	
-	player.SetRotation(rotation);
+	player->SetRotation(rotation);
 
 	if (IsKeyDown(KEY_SPACE))
 	{
-		player.Reactor();
+		player->Reactor();
 	}
 
 	if (IsMouseButtonDown(0))
 	{
-		Bullet tir = player.Shoot(1);
-		_listBullets.push_back(tir);
-		// _listSprite.push_back(&_listBullets.back());
+		// Bullet tir = player.Shoot(1);
+		// _listBullets.push_back(tir);
+		_nbBullets++;
+		_listSprite.push_back(player->Shoot(1));
 	}
 	else if (IsMouseButtonDown(1))
 	{
-		Bullet tir = player.Shoot(2);
-		_listBullets.push_back(tir);
-		// _listSprite.push_back(&_listBullets.back());
+		// Bullet tir = player.Shoot(2);
+		// _listBullets.push_back(tir);
+		_nbBullets++;
+		_listSprite.push_back(player->Shoot(2));
 	}
 }
 
@@ -69,16 +70,24 @@ void Gameplay::ScoringSystem()
 void Gameplay::BulletUpdate()
 {
 	// Bullet update
-	for (auto ItBullet = _listBullets.begin(); ItBullet != _listBullets.end(); )
-	{
-		if (ItBullet->isEnabled())
-		{
-			ItBullet->Update();
-			++ItBullet;
+	for (auto it = _listSprite.begin(); it != _listSprite.end();) {
+		auto sprite = *it;
+
+		// Essayez de convertir le pointeur de base en un pointeur de Bullet
+		if (auto bullet = std::dynamic_pointer_cast<Bullet>(sprite)) {
+			if (bullet->isEnabled()) {
+				bullet->Update();
+				++it;
+			}
+			else {
+				it = _listSprite.erase(it);
+				_nbBullets--;
+			}
 		}
-		else
-		{
-			ItBullet = _listBullets.erase(ItBullet);
+		else {
+			// C'est un sprite qui n'est pas un Bullet, effectuez une mise à jour générique ici si nécessaire
+			sprite->Update();
+			++it;
 		}
 	}
 }
@@ -87,7 +96,7 @@ void Gameplay::Update()
 {
 	Controls();
 
-	_background.Update(player.GetPosition());
+	_background.Update(player->GetPosition());
 
 	BulletUpdate();
 
@@ -96,7 +105,7 @@ void Gameplay::Update()
 		sprite->Update();
 	}
 
-	_cam.SetTarget(player.GetPosition());
+	_cam.SetTarget(player->GetPosition());
 
 	Collision();
 
@@ -123,28 +132,23 @@ void Gameplay::Draw()
 		
 		_background.Draw();
 
-		for (auto& bullet : _listBullets)
-		{
-			if (bullet.isEnabled())
-			{
-				bullet.Draw();
-			}
-		}
 		
 		for (auto& sprite : _listSprite)
 		{
-			if (sprite->isEnabled())
+			if (sprite->isEnabled() && !sprite->isItThatObject(Joueur))
 			{
 				sprite->Draw();
 			}
 		}
+
+		player->Draw();
 
 		std::string text{ "Nombre d'etoiles : " };
 		text += std::to_string(_background.GetStarAmount());
 		raywrp::DrawTextV(text, { 100,500 }, 20, VIOLETFONCE);
 
 		text = "Nombre de tirs : ";
-		text += std::to_string(_listBullets.size());
+		text += std::to_string(_nbBullets);
 		raywrp::DrawTextV(text, { 500,500 }, 20, VIOLETFONCE);
 
 	raywrp::EndDraw2D();

@@ -22,3 +22,8 @@ bool Sprite::isEnabled()
 {
 	return _actif;
 }
+
+bool Sprite::isItThatObject(ObjectType type)
+{
+	return type == _type;
+}

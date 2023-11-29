@@ -12,8 +12,8 @@
 class Gameplay : public Scene
 {
 private:
-	Player player;
-	std::list<Bullet> _listBullets;
+	std::shared_ptr<Player> player;
+	int _nbBullets;
 	float _delay;
 	bool _gamePaused;
 	Cam2D _cam;
@@ -24,7 +24,6 @@ private:
 public:
 	// Constructeur
 	Gameplay();
-
 
 	// Méthodes override
 	void Init() override;

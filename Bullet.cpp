@@ -2,14 +2,6 @@
 #include "RaylibWrapper.h"
 #include <math.h>
 
-Bullet::Bullet(Vec2<float> position, Vec2<float> size, int damage, Couleur color) : _damage(damage), _color(color), _size(size)
-{
-	_position = position;
-	_velocity = { 0,0 };
-	_speed = 0;
-	_rotation = 0;
-	_lifeTime = 0;
-}
 
 Bullet::Bullet()
 {
@@ -21,6 +13,18 @@ Bullet::Bullet()
 	_damage = 0;
 	_lifeTime = 0;
 	_color = BLANC;
+}
+
+void Bullet::Create(Vec2<float> position, Vec2<float> size, int damage, Couleur color)
+{
+	_damage = damage;
+	_position = position;
+	_color = color;
+	_size = size;
+	_velocity = { 0,0 };
+	_speed = 0;
+	_rotation = 0;
+	_lifeTime = 0;
 }
 
 void Bullet::Init(Vec2<float> baseVelocity, float speed, float rotation)

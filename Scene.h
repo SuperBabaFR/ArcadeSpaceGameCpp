@@ -1,6 +1,7 @@
 #pragma once
 #include <list>
 #include "Sprite.h"
+#include <iostream>
 
 enum SceneID {
 	Menu,
@@ -34,6 +35,6 @@ class Scene
 		SceneID GetSceneName();
 	protected:
 		SceneID _sceneName;
-		std::list<Sprite*> _listSprite;
+		std::list<std::shared_ptr<Sprite>> _listSprite;
 };
 
