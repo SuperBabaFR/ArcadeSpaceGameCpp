@@ -5,7 +5,7 @@ Gameplay::Gameplay() : Scene(Jeu), player(std::make_shared<Player>()), _cam(), _
 {
 	_delay = 3.0f;
 	_gamePaused = false;
-
+	_nbBullets = 0;
 	_cam.SetTarget({ 0, 0 });
 	_cam.SetOffset({ stg::screenWidth / 2.0f , stg::screenHeight / 2.0f });
 }

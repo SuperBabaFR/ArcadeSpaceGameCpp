@@ -19,11 +19,23 @@ void Player::Init(float x, float y)
 void Player::Update()
 {
 	Sprite::Update();
+
+	if (HEAVY_BULLET.cooldown > 0)
+		HEAVY_BULLET.cooldown -= raywrp::GetDeltaTime();
+
+	if (LIGHT_BULLET.cooldown > 0)
+		LIGHT_BULLET.cooldown -= raywrp::GetDeltaTime();
 }
 
-void Player::SetRotation(float rotation)
+void Player::Draw()
 {
-	_rotation = rotation;
+	Rect forme { _position.GetX(), _position.GetY(), _canonSize.GetX(), _canonSize.GetY() };
+	Vec2<float> origin{ _size / 2, _size / 2 };
+
+	// Canon
+	raywrp::DrawRectangle(forme, origin, _rotation, GRIS);
+	// Base du joueur
+	raywrp::DrawCircleV(_position, _size, BLEU);
 }
 
 void Player::Reactor()
@@ -36,7 +48,7 @@ void Player::Reactor()
 
 	if (abs(_velocity.GetX()) >= MAXSPEED)
 		_velocity.SetX((_velocity.GetX() > 0) ? MAXSPEED : -MAXSPEED);
-	
+
 	if (abs(_velocity.GetY()) >= MAXSPEED)
 		_velocity.SetY((_velocity.GetY() > 0) ? MAXSPEED : -MAXSPEED);
 }
@@ -44,15 +56,19 @@ void Player::Reactor()
 std::shared_ptr<Bullet> Player::Shoot(int type)
 {
 	auto bullet = std::make_shared<Bullet>();
-	if (type == 1)
+	if (type == 1 && LIGHT_BULLET.cooldown <= 0)
 	{
-		bullet->Create( _position, {20,10}, 5, BLEU );
-		bullet->Init(_velocity, 500, _rotation);
+		bullet->Create(_position, LIGHT_BULLET.size, LIGHT_BULLET.damage, LIGHT_BULLET.color);
+		bullet->Init(_velocity, LIGHT_BULLET.speed, _rotation);
+
+		LIGHT_BULLET.cooldown = LIGHT_BULLET.max_cooldown;
 	}
-	else if (type == 2)
+	else if (type == 2 && HEAVY_BULLET.cooldown <= 0)
 	{
-		bullet->Create( _position, {30,15}, 10, ROUGE );
-		bullet->Init(_velocity, 300, _rotation);
+		bullet->Create(_position, HEAVY_BULLET.size, HEAVY_BULLET.damage, HEAVY_BULLET.color);
+		bullet->Init(_velocity, HEAVY_BULLET.speed, _rotation);
+
+		HEAVY_BULLET.cooldown = HEAVY_BULLET.max_cooldown;
 	}
 
 	return bullet;
@@ -63,13 +79,7 @@ Vec2<float> Player::GetPosition()
 	return _position;
 }
 
-void Player::Draw()
+void Player::SetRotation(float rotation)
 {
-	Rect forme { _position.GetX(), _position.GetY(), _canonSize.GetX(), _canonSize.GetY() };
-	Vec2<float> origin{ _size / 2, _size / 2 };
-
-	// Canon
-	raywrp::DrawRectangle(forme, origin, _rotation, GRIS);
-	// Base du joueur
-	raywrp::DrawCircleV(_position, _size, BLEU);
+	_rotation = rotation;
 }
